@@ -1,4 +1,4 @@
-# How to use
+# Fapello downloader with multiprocessing ( CPU )
 1. Enter the username from the url, for example: alina-becker
 2. Select the function is 1. Download all photos, 2. Download new photos or missed, 3.Download photos in a range.
 3. Enter the number of processors to use
