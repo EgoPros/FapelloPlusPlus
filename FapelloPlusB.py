@@ -6,11 +6,9 @@ from fake_useragent import UserAgent
 import multiprocessing
 
 
-
-
 def create_directory():
     while True:
-        try: 
+        try:
             directory = input("Enter the name of the directory: ")
             parent_dir = os.getcwd()
             path = os.path.join(parent_dir, directory)
@@ -18,7 +16,7 @@ def create_directory():
             print(f"Directory '{directory}' created.")
             break
         except FileExistsError:
-                print(f"Directory {directory} already exists.")
+            print(f"Directory {directory} already exists.")
     return directory
 
 
@@ -50,21 +48,17 @@ def download_image(session, url, header, directory):
 
 def download_chunk(*args):
     URL, chunk, session, header, directory, in_range = args
-    c = 1
     start_id, end_id = chunk
-    if start_id <= 999:
-        c = 1
-    elif start_id % 1000 == 0:
-        print("You're lucky!")
-    else:
-        c = int(str(start_id)[0]) + 1
+    c = 1 if start_id <= 999 else int(str(start_id)[0]) + 1
+
     for imageID in range(start_id, end_id, in_range):
         url = f"{URL[0]}/{c}000/{URL[2]}_{str(imageID).zfill(4)}.jpg"
+        if (imageID and start_id) % 1000 == 0:
+            url = f"{URL[0]}/{int(str(imageID)[0])+1}000/{URL[2]}_{str(imageID).zfill(4)}.jpg"
+
         if imageID % 1000 == 0:
-            if in_range == 1:
-                c += 1
-            else:
-                c -= 1
+            c += 1 if in_range == 1 else -1
+
         download_image(session, url, header, directory)
 
 
