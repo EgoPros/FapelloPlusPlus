@@ -59,12 +59,12 @@ def download_chunk(*args):
     else:
         c = int(str(start_id)[0]) + 1
     for imageID in range(start_id, end_id, in_range):
+        url = f"{URL[0]}/{c}000/{URL[2]}_{str(imageID).zfill(4)}.jpg"
         if imageID % 1000 == 0:
             if in_range == 1:
                 c += 1
             else:
                 c -= 1
-        url = f"{URL[0]}/{c}000/{URL[2]}_{str(imageID).zfill(4)}.jpg"
         download_image(session, url, header, directory)
 
 
