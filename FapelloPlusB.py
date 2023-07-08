@@ -146,7 +146,7 @@ def chunk_loader(args):
         result.get()  # Raise an exception if occurred
 
 
-def downloader():
+def main():
     if __name__ == "__main__":
         URL = get_last_photo()
         header = {"User-Agent": UserAgent(use_external_data=True).random}
@@ -203,4 +203,4 @@ def downloader():
 
 
 if __name__ == "__main__":
-    downloader()
+    main()
